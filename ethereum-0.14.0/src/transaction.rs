@@ -412,14 +412,12 @@ impl Decodable for LegacyTransaction {
 
 		let v = rlp.val_at(6)?;
 		let r = {
-			let mut rarr = [0_u8; 32];
-			rlp.val_at::<U256>(7)?.to_big_endian();
-			H256::from(rarr)
+			  let r_bytes = rlp.val_at::<U256>(7)?.to_big_endian();
+    			H256::from(r_bytes)
 		};
 		let s = {
-			let mut sarr = [0_u8; 32];
-			rlp.val_at::<U256>(8)?.to_big_endian();
-			H256::from(sarr)
+			  let s_bytes = rlp.val_at::<U256>(8)?.to_big_endian();
+    		H256::from(s_bytes)
 		};
 		let signature = TransactionSignature::new(v, r, s)
 			.ok_or(DecoderError::Custom("Invalid transaction signature format"))?;
@@ -500,14 +498,12 @@ impl Decodable for EIP2930Transaction {
 			access_list: rlp.list_at(7)?,
 			odd_y_parity: rlp.val_at(8)?,
 			r: {
-				let mut rarr = [0_u8; 32];
-				rlp.val_at::<U256>(9)?.to_big_endian();
-				H256::from(rarr)
+				let r_bytes = rlp.val_at::<U256>(9)?.to_big_endian();
+				H256::from(r_bytes)
 			},
 			s: {
-				let mut sarr = [0_u8; 32];
-				rlp.val_at::<U256>(10)?.to_big_endian();
-				H256::from(sarr)
+				let s_bytes = rlp.val_at::<U256>(10)?.to_big_endian();
+				H256::from(s_bytes)
 			},
 		})
 	}
@@ -580,14 +576,12 @@ impl Decodable for EIP1559Transaction {
 			access_list: rlp.list_at(8)?,
 			odd_y_parity: rlp.val_at(9)?,
 			r: {
-				let mut rarr = [0_u8; 32];
-				rlp.val_at::<U256>(10)?.to_big_endian();
-				H256::from(rarr)
+				let r_bytes = rlp.val_at::<U256>(10)?.to_big_endian();
+				H256::from(r_bytes)
 			},
 			s: {
-				let mut sarr = [0_u8; 32];
-				rlp.val_at::<U256>(11)?.to_big_endian();
-				H256::from(sarr)
+				let s_bytes = rlp.val_at::<U256>(11)?.to_big_endian();
+				H256::from(s_bytes)
 			},
 		})
 	}
