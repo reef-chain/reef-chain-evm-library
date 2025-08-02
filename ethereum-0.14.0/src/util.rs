@@ -4,6 +4,7 @@ use ethereum_types::H256;
 use hash256_std_hasher::Hash256StdHasher;
 use hash_db::Hasher;
 use sha3::{Digest, Keccak256};
+use alloc::vec::Vec;
 use trie_root::Value as TrieStreamValue;
 
 /// Concrete `Hasher` impl for the Keccak-256 hash
