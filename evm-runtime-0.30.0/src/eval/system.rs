@@ -68,16 +68,14 @@ pub fn caller<H: Handler>(runtime: &mut Runtime) -> Control<H> {
 }
 
 pub fn callvalue<H: Handler>(runtime: &mut Runtime) -> Control<H> {
-	let ret = H256::default();
-	runtime.context.apparent_value.to_big_endian();
+	let ret = H256::from(runtime.context.apparent_value.to_big_endian());
 	push!(runtime, ret);
 
 	Control::Continue
 }
 
 pub fn gasprice<H: Handler>(runtime: &mut Runtime, handler: &H) -> Control<H> {
-	let ret = H256::default();
-	handler.gas_price().to_big_endian();
+	let ret = H256::from(handler.gas_price().to_big_endian());
 	push!(runtime, ret);
 
 	Control::Continue
